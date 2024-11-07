@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: application-golang-role-binding
+  namespace: core
+  labels:
+    app: application-golang
+subjects:
+  - kind: ServiceAccount
+    name: application-golang-service-account
+    namespace: core
+roleRef:
+  kind: Role
+  name: application-golang-role
+  apiGroup: rbac.authorization.k8s.io

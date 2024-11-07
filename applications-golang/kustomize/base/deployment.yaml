@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-golang-deployment
+  namespace: core
+  labels:
+    app: application-golang
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: application-golang
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: application-golang
+    spec:
+      serviceAccountName: application-golang-service-account
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: application-golang
+        securityContext:
+            capabilities:
+                drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+        resources:
+            requests:
+                memory: "128Mi"
+                cpu: "100m"
+            limits:
+                memory: "136Mi"
+                cpu: "120m"
+        envFrom:
+          - configMapRef:
+              name: application-golang-config
+          - secretRef:
+              name: application-golang-secret
+        image: ""
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+      volumes:
+        - name: application-golang-config-volume
+          configMap:
+            name: application-golang-config
+      nodeSelector: { }
+      affinity: { }
+      tolerations: [ ]
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+
+
+
+
+
+
+

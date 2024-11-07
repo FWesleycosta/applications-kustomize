@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-golang-deployment
+  namespace: core
+  labels:
+    app: application-golang
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: application-golang
+          image: ""
+  selector:
+    matchLabels:
+      app: application-golang

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: application-golang
+  namespace: core
+  labels:
+    app: application-golang
+data:
+  API_V1_STR: '/api/v1'
+  LOG_LEVEL: 'INFO'

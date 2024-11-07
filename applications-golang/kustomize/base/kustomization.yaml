@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - service.yaml
+  - role.yaml
+  - deployment.yaml
+  - configmap.yaml
+  - secret.yaml
+  - service-account.yaml
+  - rolebinding.yaml
+
+commonLabels:
+  app: application-golang
