@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: applications-kustomize
+  title: Applications Kustomize
+  description: "Manifestos Kustomize para publicar uma aplicação no Kubernetes com ArgoCD."
+  tags:
+    - argocd
+    - gitops
+    - kubernetes
+    - kustomize
+  annotations:
+    github.com/project-slug: FWesleycosta/applications-kustomize
+spec:
+  type: infrastructure
+  lifecycle: experimental
+  owner: fwesleycosta
+  system: gitops
